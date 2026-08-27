@@ -15,7 +15,7 @@ const cors = require('cors')
 
 
 app.use(cors({
-    origin: 'https://code-verdict-frontend.vercel.app',
+    origin: 'https://codeverdict-alpha.vercel.app',
     credentials: true
 }))
 
