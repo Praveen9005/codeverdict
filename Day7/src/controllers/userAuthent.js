@@ -29,9 +29,12 @@ const register = async (req, res) => {
             { expiresIn: 60 * 60 }
         );
 
-        res.cookie("token", token, {
-            maxAge: 60 * 60 * 1000,
-        });
+       res.cookie('token', token, {
+       maxAge: 60*60*1000,
+       httpOnly: true,
+       secure: true,
+       sameSite: 'none'
+      })
 
         const reply = {
             firstName: user.firstName,
@@ -74,7 +77,12 @@ const login = async (req,res)=>{
             role: user.role  
         }
         const token =  jwt.sign({_id:user._id , emailId:emailId, role:user.role},process.env.JWT_KEY,{expiresIn: 60*60});
-        res.cookie('token',token,{maxAge: 60*60*1000});
+        res.cookie('token', token, {
+        maxAge: 60*60*1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+        })
         res.status(201).json({
             user:reply,
             message:"Loged in Succesfully"
@@ -122,7 +130,12 @@ const adminRegister = async(req,res)=>{
     
      const user =  await User.create(req.body);
      const token =  jwt.sign({_id:user._id , emailId:emailId, role:user.role},process.env.JWT_KEY,{expiresIn: 60*60});
-     res.cookie('token',token,{maxAge: 60*60*1000});
+     res.cookie('token', token, {
+     maxAge: 60*60*1000,
+     httpOnly: true,
+     secure: true,
+    sameSite: 'none'
+     })
      res.status(201).send("User Registered Successfully");
     }
     catch(err){
