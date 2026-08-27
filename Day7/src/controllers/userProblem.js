@@ -240,22 +240,21 @@ const solvedAllProblembyUser = async(req,res)=>{
 
 }
 
-const submittedProblem = async(req,res)=>{
-
+const submittedProblem = async(req, res) => {
   try {
     const userId = req.result.id;
     const problemId = req.params.pid;
 
-    const ans = await Submission.find({userId ,problemId});
+    const ans = await Submission.find({ userId, problemId });
 
-    if(ans.length==0){
-      res.status(200).send("No Submission is Present");
+    if (ans.length == 0) {
+      return res.status(200).send([]);
     }
 
-    res.status(200).send(ans);
-    
+    return res.status(200).send(ans);
+
   } catch (error) {
-    
+    res.status(500).send("Internal Server Error: " + error.message);
   }
 }
 
