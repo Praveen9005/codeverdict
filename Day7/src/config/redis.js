@@ -11,14 +11,18 @@
 
 // module.exports = redisClient;
 
+
+
+
+
 const { createClient } = require('redis');
 
 const redisClient = createClient({
     username: 'default',
     password: process.env.REDIS_PASS,
     socket: {
-        host: 'clarion-cobaltish-dawnlike-34615.db.redis.io',
-        port: 11048,
+        host:'skin-versed-blush-31547.db.redis.io',
+        port:18448,
         reconnectStrategy: (retries) => {
             if (retries > 10) {
                 console.error('Redis: too many retries, giving up');
